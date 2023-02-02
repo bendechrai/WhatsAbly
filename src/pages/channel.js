@@ -12,7 +12,7 @@ const Channel = () => {
         channel.history((err, result) => {
             updateMessages(result.items)
         });
-        
+
         // because we want to detect changes to channelId but don't use it...
         // eslint-disable-next-line
     }, [params.channelId])
@@ -37,7 +37,7 @@ const Channel = () => {
     let timer = null;
     const typing = () => {
         clearTimeout(timer);
-        
+
         if (!isTyping) {
             setIsTyping(true)
             updateStatus(`${user.email} is typing`);
@@ -70,7 +70,9 @@ const Channel = () => {
                 />
             </div>
             <button onClick={send}>Send</button>
-            <pre>{JSON.stringify(presenceData, null, 4)}</pre>
+            {presenceData && presenceData.map((p) => <p>
+                {p.data}
+            </p>)}
         </>
     );
 };

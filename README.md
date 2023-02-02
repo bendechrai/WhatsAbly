@@ -34,4 +34,5 @@ I would want to:
 
 * Use JWT auth for token generation
 * Get the indicator working in subsequent channels
+* Make the typing indicator more UX friendly by contcatenating into a single string (i.e. "ben@dechrai.com and susan@example.com are typing")
 * Implment [OpenPGP.js](https://openpgpjs.org/) to create pub/priv keys per user so messages could be end-to-end encrypted
