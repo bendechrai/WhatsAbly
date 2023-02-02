@@ -1,0 +1,62 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  cursor: pointer;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  background-color: #008844;
+  padding: 0.5em 1em;
+}
+
+header h1 {
+  flex-grow: 1;
+}
+
+header .menuitem {
+  padding: 0;
+  background-color: inherit;
+  border: none;
+  font-size: 1rem;
+  vertical-align: baseline;
+  color: #fff;
+  text-decoration: none;
+}
+
+header nav ul {
+  display: flex;
+  gap: 1em;
+  list-style: none;
+}
+
+main {
+  padding: 0.5em 1em;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.messages .message {
+  border: 1px solid #ddd;
+  border-radius: 1em;
+  margin-bottom: 1em;
+  box-shadow: 5px 5px 5px #ddd;
+  padding: 1em; 
+}
+
+.messages .message .sender {
+  font-style: italic;
+  color: #999;
+  text-align: right;
+}
