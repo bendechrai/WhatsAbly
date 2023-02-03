@@ -44,7 +44,8 @@ const Channel = () => {
     // Handle publishing of messages
     const [composeText, setComposeText] = useState('');
     const { user } = useAuth0();
-    const send = () => {
+    const send = (event) => {
+        event.preventDefault();
         channel.publish("message", { text: composeText, sender: user.email });
         setComposeText('');
     }
@@ -80,14 +81,16 @@ const Channel = () => {
                 )}
             </div>
             <div className="composer">
-                <input
-                    type="text"
-                    value={composeText}
-                    onChange={(e) => setComposeText(e.target.value)}
-                    onKeyUp={(e) => typing()}
-                />
+                <form onSubmit={send}>
+                    <input
+                        type="text"
+                        value={composeText}
+                        onChange={(e) => setComposeText(e.target.value)}
+                        onKeyUp={(e) => typing()}
+                    />
+                    <button>Send</button>
+                </form>
             </div>
-            <button onClick={send}>Send</button>
         </>
     );
 };
