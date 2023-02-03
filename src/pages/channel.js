@@ -3,6 +3,24 @@ import { useParams } from "react-router-dom";
 import { configureAbly, useChannel, usePresence } from "@ably-labs/react-hooks";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 
+const WhoIsTyping = ({ presenceData }) => {
+
+    let names = '';
+    if (presenceData.length > 0) {
+        names = presenceData
+            .map((p) => { return p.data })
+            .filter(p => { return p !== "" && p !== undefined })
+            .join(', ')
+    }
+    if (names === '') {
+        names = `Nobody. It's lonely in here...`;
+    }
+
+    return <p>
+        Who's typing? {names}
+    </p>
+}
+
 const Channel = () => {
     let params = useParams();
     configureAbly({ authUrl: `/.netlify/functions/auth` });
@@ -40,7 +58,7 @@ const Channel = () => {
 
         if (!isTyping) {
             setIsTyping(true)
-            updateStatus(`${user.email} is typing`);
+            updateStatus(user.email);
 
             timer = setTimeout(() => {
                 setIsTyping(false);
@@ -52,7 +70,7 @@ const Channel = () => {
     return (
         <>
             <h1>Welcome to #{params.channelId}</h1>
-            <h2>Who's here?</h2>
+            <WhoIsTyping presenceData={presenceData} />
             <div className="messages">
                 {messages && messages.map((msg, index) =>
                     <div className="message" key={msg.id}>
@@ -70,9 +88,6 @@ const Channel = () => {
                 />
             </div>
             <button onClick={send}>Send</button>
-            {presenceData && presenceData.map((p) => <p>
-                {p.data}
-            </p>)}
         </>
     );
 };
